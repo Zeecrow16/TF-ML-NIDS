@@ -10,4 +10,4 @@ seaborn
 notebook
 jupyterlab
 
-pytest
+pylint
