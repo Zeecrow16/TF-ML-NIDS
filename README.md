@@ -2,7 +2,7 @@
 
 This project uses **Time–Frequency Analysis (TFA)** and **binary classification models** to classify network packets as **malicious or benign**. The pipeline includes:
 
-- **Feature extraction** using Fourier Transform (FT) and Continuous Wavelet Transform (CWT) on packet timing features (inter-packet intervals).  
+- **Feature extraction** using Short Term Fourier Transform (STFT) and Continuous Wavelet Transform (CWT) on packet timing features (inter-packet intervals).  
 - **Model training** using pre-existing classifiers.  
 - **Evaluation** on both benign and simulated attack traffic (Kali Linux).  
 - **Code quality & testing** following PEP8 standards and using PyUnit. 
