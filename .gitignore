@@ -28,6 +28,7 @@ ENV/
 *.pth
 *.joblib
 *.pkl
+*.csv
 
 # ===============================
 # Logs & temp
