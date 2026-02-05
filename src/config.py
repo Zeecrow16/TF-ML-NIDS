@@ -1,0 +1,16 @@
+RAW_DATA_CSV = "data/raw/NF-UNSW-NB15-v3.csv"
+CWT_OUTPUT_CSV = "data/processed/02_cwt_supervised.csv"
+CWT_RESULTS_FOLDER = "cwt_results"
+BASELINE_RESULTS_FOLDER = "baseline_results"
+
+TOTAL_SAMPLES = 100_000
+BENIGN_RATIO = 0.85
+MIN_ATTACK_SAMPLES = 500
+RANDOM_STATE = 42
+
+WAVELET = "cmor3.5-1"
+SCALES = range(1, 5)
+
+KNN_NEIGHBORS = 5
+RF_ESTIMATORS = 200
+TEST_SIZE = 0.2
