@@ -1,17 +1,23 @@
 import pandas as pd
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from sklearn.linear_model import LogisticRegression
-from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier
-from typing import Any, Dict
+from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.preprocessing import StandardScaler
+
 
 class CwtTraining:
     """
     Train ML models (Logistic Regression, KNN, Random Forest) on cwt processed dataset.
     """
 
-    def __init__(self, csv_path: str, label_col: str = "Label", test_size: float = 0.2, random_state: int = 42):
+    def __init__(
+        self,
+        csv_path: str,
+        label_col: str = "Label",
+        test_size: float = 0.2,
+        random_state: int = 42,
+    ):
         self.csv_path = csv_path
         self.label_col = label_col
         self.test_size = test_size
@@ -27,7 +33,9 @@ class CwtTraining:
     def load_and_prepare_data(self):
         df = pd.read_csv(self.csv_path)
 
-        drop_cols = [self.label_col, "Attack"] if "Attack" in df.columns else [self.label_col]
+        drop_cols = (
+            [self.label_col, "Attack"] if "Attack" in df.columns else [self.label_col]
+        )
         X = df.drop(columns=drop_cols)
         y = df[self.label_col]
 
@@ -41,7 +49,6 @@ class CwtTraining:
         self.y_train = y_train
         self.y_test = y_test
 
-
     def train_logistic_regression(self):
         model = LogisticRegression(max_iter=1000)
         model.fit(self.X_train, self.y_train)
@@ -53,6 +60,8 @@ class CwtTraining:
         self.trained_models["KNN"] = model
 
     def train_random_forest(self, n_estimators: int = 200):
-        model = RandomForestClassifier(n_estimators=n_estimators, random_state=self.random_state)
+        model = RandomForestClassifier(
+            n_estimators=n_estimators, random_state=self.random_state
+        )
         model.fit(self.X_train, self.y_train)
         self.trained_models["Random Forest"] = model

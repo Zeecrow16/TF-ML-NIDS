@@ -1,8 +1,16 @@
-import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn.metrics import accuracy_score, f1_score, recall_score, confusion_matrix, ConfusionMatrixDisplay
-from typing import Dict, Any
 import os
+from typing import Any, Dict
+
+import matplotlib.pyplot as plt
+import pandas as pd
+from sklearn.metrics import (
+    ConfusionMatrixDisplay,
+    accuracy_score,
+    confusion_matrix,
+    f1_score,
+    recall_score,
+)
+
 
 class ModelEvaluator:
     """
@@ -19,11 +27,7 @@ class ModelEvaluator:
             os.remove(self.log_file)
 
     def compute_metrics(
-        self,
-        trained_models: Dict[str, Any],
-        X_test,
-        y_test,
-        feature_type: str = "CWT"
+        self, trained_models: Dict[str, Any], X_test, y_test, feature_type: str = "CWT"
     ) -> pd.DataFrame:
         """
         Compute Accuracy, F1, Recall for each model and append to results DataFrame.
@@ -35,13 +39,15 @@ class ModelEvaluator:
             acc = accuracy_score(y_test, y_pred)
             f1 = f1_score(y_test, y_pred)
             rec = recall_score(y_test, y_pred)
-            metrics.append({
-                "Model": name,
-                "Feature_Type": feature_type,
-                "Accuracy": acc,
-                "F1": f1,
-                "Recall": rec
-            })
+            metrics.append(
+                {
+                    "Model": name,
+                    "Feature_Type": feature_type,
+                    "Accuracy": acc,
+                    "F1": f1,
+                    "Recall": rec,
+                }
+            )
 
             with open(self.log_file, "a") as f:
                 f.write(f"{feature_type} - {name} Metrics:\n")
@@ -57,11 +63,7 @@ class ModelEvaluator:
         return df_metrics
 
     def plot_confusion_matrices(
-        self,
-        trained_models: Dict[str, Any],
-        X_test,
-        y_test,
-        feature_type: str = "CWT"
+        self, trained_models: Dict[str, Any], X_test, y_test, feature_type: str = "CWT"
     ):
         """
         Plot and save confusion matrix for each model.
@@ -73,8 +75,10 @@ class ModelEvaluator:
             disp.plot(cmap=plt.cm.Blues)
             plt.title(f"{name} ({feature_type})")
 
-            filename = os.path.join(self.save_folder, f"{feature_type}_{name}_confusion_matrix.png")
-            plt.savefig(filename, bbox_inches='tight')
+            filename = os.path.join(
+                self.save_folder, f"{feature_type}_{name}_confusion_matrix.png"
+            )
+            plt.savefig(filename, bbox_inches="tight")
             plt.close()
 
     def plot_metric_histograms(self):
@@ -94,13 +98,13 @@ class ModelEvaluator:
                     subset["Model"] + f" ({feature_type})",
                     subset[metric],
                     alpha=0.7,
-                    label=feature_type
+                    label=feature_type,
                 )
             ax.set_title(metric)
             ax.set_ylim(0, 1)
-            ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha='right')
+            ax.set_xticklabels(ax.get_xticklabels(), rotation=45, ha="right")
         plt.tight_layout()
 
         filename = os.path.join(self.save_folder, "metrics_histogram.png")
-        plt.savefig(filename, bbox_inches='tight')
+        plt.savefig(filename, bbox_inches="tight")
         plt.close()
