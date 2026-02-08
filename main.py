@@ -15,14 +15,14 @@ from src.features.cwt import CalculateCwt
 from src.models.evaluate import ModelEvaluator
 from src.models.train_baseline import BaselineTraining
 from src.models.train_cwt import CwtTraining
-from src.preprocessing.clean_data import UNSWNB15Dataset
+from src.preprocessing.clean_data import ProcessDataset
 
 # Full ML pipeline:
 
 
 def run_pipeline():
     #  Load and preprocess dataset
-    dataset = UNSWNB15Dataset(csv_path=RAW_DATA_CSV)
+    dataset = ProcessDataset(csv_path=RAW_DATA_CSV)
     dataset.load_data()
     dataset.clean_data()
     dataset.sample_data(total_samples=TOTAL_SAMPLES, benign_ratio=BENIGN_RATIO)

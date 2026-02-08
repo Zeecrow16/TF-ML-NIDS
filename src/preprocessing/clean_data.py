@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 
-class UNSWNB15Dataset:
+class ProcessDataset:
     """
     Class to handle loading, cleaning and sampling the UNSW-NB15 dataset.
     """
