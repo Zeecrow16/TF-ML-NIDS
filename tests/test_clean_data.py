@@ -3,7 +3,7 @@ import unittest
 import numpy as np
 import pandas as pd
 
-from src.preprocessing.clean_data import UNSWNB15Dataset
+from src.preprocessing.clean_data import ProcessDataset
 
 
 class TestDataCleaning(unittest.TestCase):
@@ -25,7 +25,7 @@ class TestDataCleaning(unittest.TestCase):
         )
 
     def test_label_creation(self):
-        dataset = UNSWNB15Dataset(csv_path=None)
+        dataset = ProcessDataset(csv_path=None)
         dataset.df = self.df
 
         dataset.clean_data()
