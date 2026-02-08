@@ -44,18 +44,20 @@ class BaselineTraining:
         if n_rows is not None:
             self.df = self.df.sample(n=n_rows, random_state=self.random_state)
 
-        drop_cols = [
-            "Attack",
-            "Label",
-            "IPV4_SRC_ADDR",
-            "IPV4_DST_ADDR",
-            "L4_SRC_PORT",
-            "L4_DST_PORT",
-            "PROTOCOL",
-            "L7_PROTO",
+        iat_features = [
+            "SRC_TO_DST_IAT_MIN",
+            "SRC_TO_DST_IAT_AVG",
+            "SRC_TO_DST_IAT_MAX",
+            "SRC_TO_DST_IAT_STDDEV",
+            "DST_TO_SRC_IAT_MIN",
+            "DST_TO_SRC_IAT_AVG",
+            "DST_TO_SRC_IAT_MAX",
+            "DST_TO_SRC_IAT_STDDEV",
+            "SRC_TO_DST_AVG_THROUGHPUT",
+            "DST_TO_SRC_AVG_THROUGHPUT",
         ]
 
-        X = self.df.drop(columns=[col for col in drop_cols if col in self.df.columns])
+        X = self.df[iat_features]
         y = self.df[self.label_col]
 
         X_train, X_test, y_train, y_test = train_test_split(

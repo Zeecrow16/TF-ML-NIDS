@@ -1,5 +1,5 @@
 RAW_DATA_CSV = "data/raw/NF-UNSW-NB15-v3.csv"
-CWT_OUTPUT_CSV = "data/processed/02_cwt_supervised.csv"
+CWT_OUTPUT_CSV = "data/processed/03_cwt_supervised.csv"
 CWT_RESULTS_FOLDER = "cwt_results"
 BASELINE_RESULTS_FOLDER = "baseline_results"
 

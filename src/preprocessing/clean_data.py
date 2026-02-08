@@ -15,13 +15,13 @@ class UNSWNB15Dataset:
         self.df_clean = None
         self.df_sampled = None
 
-        self.packet_size = [
-            "NUM_PKTS_UP_TO_128_BYTES",
-            "NUM_PKTS_128_TO_256_BYTES",
-            "NUM_PKTS_256_TO_512_BYTES",
-            "NUM_PKTS_512_TO_1024_BYTES",
-            "NUM_PKTS_1024_TO_1514_BYTES",
-        ]
+        # self.packet_size = [
+        #     "NUM_PKTS_UP_TO_128_BYTES",
+        #     "NUM_PKTS_128_TO_256_BYTES",
+        #     "NUM_PKTS_256_TO_512_BYTES",
+        #     "NUM_PKTS_512_TO_1024_BYTES",
+        #     "NUM_PKTS_1024_TO_1514_BYTES",
+        # ]
 
         self.src_to_dst_timing = [
             "SRC_TO_DST_IAT_MIN",
@@ -37,7 +37,7 @@ class UNSWNB15Dataset:
             "DST_TO_SRC_IAT_STDDEV",
         ]
 
-        self.byte_signal = ["IN_BYTES", "OUT_BYTES"]
+        # self.byte_signal = ["IN_BYTES", "OUT_BYTES"]
 
         self.throughput_signal = [
             "SRC_TO_DST_AVG_THROUGHPUT",
@@ -45,10 +45,10 @@ class UNSWNB15Dataset:
         ]
 
         self.cwt_columns = (
-            self.packet_size
-            + self.src_to_dst_timing
+            # self.packet_size
+            self.src_to_dst_timing
             + self.dst_to_src_timing
-            + self.byte_signal
+            # + self.byte_signal
             + self.throughput_signal
         )
 
@@ -117,10 +117,10 @@ class UNSWNB15Dataset:
             subset = self.df_sampled[self.df_sampled["Attack"] == attack_type]
 
             attack_signals[attack_type] = {
-                "packet_size": subset[self.packet_size].values,
+                # "packet_size": subset[self.packet_size].values,
                 "src_to_dst_timing": subset[self.src_to_dst_timing].values,
                 "dst_to_src_timing": subset[self.dst_to_src_timing].values,
-                "byte_signal": subset[self.byte_signal].values,
+                # "byte_signal": subset[self.byte_signal].values,
                 "throughput_signal": subset[self.throughput_signal].values,
             }
 

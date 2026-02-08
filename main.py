@@ -30,10 +30,9 @@ def run_pipeline():
 
     #  Compute CWT features
     signal_categories = {
-        "pkt": dataset.packet_size,
+        # "pkt": dataset.packet_size,
         "src": dataset.src_to_dst_timing,
         "dst": dataset.dst_to_src_timing,
-        "byte": dataset.byte_signal,
         "thr": dataset.throughput_signal,
     }
     cwt_creator = CalculateCwt(wavelet=WAVELET, scales=SCALES)

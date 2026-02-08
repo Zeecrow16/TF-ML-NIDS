@@ -1,5 +1,6 @@
 import unittest
 
+import numpy as np
 import pandas as pd
 
 from src.preprocessing.clean_data import UNSWNB15Dataset
@@ -10,11 +11,6 @@ class TestDataCleaning(unittest.TestCase):
         self.df = pd.DataFrame(
             {
                 "Attack": ["Benign", "DoS"],
-                "NUM_PKTS_UP_TO_128_BYTES": [1, 2],
-                "NUM_PKTS_128_TO_256_BYTES": [1, 2],
-                "NUM_PKTS_256_TO_512_BYTES": [1, 2],
-                "NUM_PKTS_512_TO_1024_BYTES": [1, 2],
-                "NUM_PKTS_1024_TO_1514_BYTES": [1, 2],
                 "SRC_TO_DST_IAT_MIN": [1, 2],
                 "SRC_TO_DST_IAT_AVG": [1, 2],
                 "SRC_TO_DST_IAT_MAX": [1, 2],
@@ -23,8 +19,6 @@ class TestDataCleaning(unittest.TestCase):
                 "DST_TO_SRC_IAT_AVG": [1, 2],
                 "DST_TO_SRC_IAT_MAX": [1, 2],
                 "DST_TO_SRC_IAT_STDDEV": [1, 2],
-                "IN_BYTES": [1, 2],
-                "OUT_BYTES": [1, 2],
                 "SRC_TO_DST_AVG_THROUGHPUT": [1, 2],
                 "DST_TO_SRC_AVG_THROUGHPUT": [1, 2],
             }
@@ -36,4 +30,17 @@ class TestDataCleaning(unittest.TestCase):
 
         dataset.clean_data()
 
-        self.assertIn("Attack", dataset.df_clean.columns)
+        expected_columns = dataset.cwt_columns + ["Attack"]
+        for col in expected_columns:
+            self.assertIn(col, dataset.df_clean.columns)
+
+        self.assertFalse(dataset.df_clean.isna().any().any())
+
+        self.assertTrue(
+            dataset.df_clean["Attack"].dtype == object
+            or np.issubdtype(dataset.df_clean["Attack"].dtype, np.str_)
+        )
+
+
+if __name__ == "__main__":
+    unittest.main()
