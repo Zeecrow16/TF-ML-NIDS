@@ -11,5 +11,3 @@ notebook
 jupyterlab
 
 pylint
-
-xgboost
