@@ -1,15 +1,15 @@
 Baseline - Logistic Regression Metrics:
-  Accuracy: 0.9145
-  F1 Score: 0.6818
-  Recall: 0.5769
+  Accuracy: 0.8439
+  F1 Score: 0.1974
+  Recall: 0.1126
 
 Baseline - KNN Metrics:
-  Accuracy: 0.9861
-  F1 Score: 0.9564
-  Recall: 0.9581
+  Accuracy: 0.9786
+  F1 Score: 0.9359
+  Recall: 0.9190
 
 Baseline - Random Forest Metrics:
-  Accuracy: 0.9937
-  F1 Score: 0.9800
-  Recall: 0.9817
+  Accuracy: 0.9857
+  F1 Score: 0.9569
+  Recall: 0.9340
 

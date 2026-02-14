@@ -14,28 +14,6 @@ class CalculateCwt:
         self.wavelet = wavelet
         self.scales = scales if scales is not None else np.arange(1, 5)
 
-    @staticmethod
-    def cwt_mean_features(signal: np.ndarray, scales: np.ndarray, wavelet: str):
-        """
-        Compute CWT for a single signal row and extract mean magnitude & phase.
-        """
-        coeffs, _ = pywt.cwt(signal, scales=scales, wavelet=wavelet)
-        magnitude = np.abs(coeffs)
-        phase = np.angle(coeffs)
-        return magnitude.mean(), phase.mean()
-
-    def calculate_cwt_category(self, df: pd.DataFrame, columns: List[str]):
-        """
-        Compute mean magnitude & phase for a feature category.
-        """
-        signals = df[columns].values
-        results = np.array(
-            [self.cwt_mean_features(row, self.scales, self.wavelet) for row in signals]
-        )
-        mean_mag = results[:, 0]
-        mean_phase = results[:, 1]
-        return mean_mag, mean_phase
-
     def calculate_all_categories(
         self, df: pd.DataFrame, signal_categories: Dict[str, List[str]]
     ):
@@ -48,6 +26,28 @@ class CalculateCwt:
             df_cwt[f"{cat}_mean"] = mean_mag
             df_cwt[f"{cat}_phase"] = mean_phase
         return df_cwt
+    
+    def calculate_cwt_category(self, df: pd.DataFrame, columns: List[str]):
+        """
+        Compute mean magnitude & phase for a feature
+        """
+        signals = df[columns].values
+        results = np.array(
+            [self.cwt_mean_features(row, self.scales, self.wavelet) for row in signals]
+        )
+        mean_mag = results[:, 0]
+        mean_phase = results[:, 1]
+        return mean_mag, mean_phase
+
+    @staticmethod
+    def cwt_mean_features(signal: np.ndarray, scales: np.ndarray, wavelet: str):
+        """
+        Compute CWT for a single signal row and extract mean magnitude & phase.
+        """
+        coeffs, _ = pywt.cwt(signal, scales=scales, wavelet=wavelet)
+        magnitude = np.abs(coeffs)
+        phase = np.angle(coeffs)
+        return magnitude.mean(), phase.mean()
 
     def save_supervised_csv(self, df: pd.DataFrame, path: str):
         """
