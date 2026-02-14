@@ -1,0 +1,14 @@
+CWT - Logistic Regression Metrics:
+  Accuracy: 0.8527
+  F1 Score: 0.0000
+  Recall: 0.0000
+
+CWT - KNN Metrics:
+  Accuracy: 0.8527
+  F1 Score: 0.0000
+  Recall: 0.0000
+
+CWT - Random Forest Metrics:
+  Accuracy: 0.8450
+  F1 Score: 0.0000
+  Recall: 0.0000

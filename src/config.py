@@ -1,5 +1,5 @@
-RAW_DATA_CSV = "data/raw/NF-CICIDS2018-v3.csv"
-CWT_OUTPUT_CSV = "data/processed/00_cwt_supervised.csv"
+RAW_DATA_CSV = "path/to/dataset"
+CWT_OUTPUT_CSV = "data/processed/04_cwt_supervised.csv"
 CWT_RESULTS_FOLDER = "cwt_results"
 BASELINE_RESULTS_FOLDER = "baseline_results"
 
